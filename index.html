@@ -5,64 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanju Regar - NEW TO</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: Arial, sans-serif; }
-        
-        /* ऊपर आपकी ब्रांडिंग वाली पट्टी जो हमेशा ऊपर दिखेगी */
-        .custom-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background: #212121;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 15px;
-            box-sizing: border-box;
-            z-index: 9999;
-            border-bottom: 1px solid #333;
-        }
-        .brand-title {
-            font-size: 18px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .brand-title span { color: #ff0000; }
-        
-        .header-action {
-            font-size: 14px;
-            background: #ff0000;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-weight: bold;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; padding-bottom: 60px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #fff; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
+        .brand { font-size: 18px; font-weight: bold; color: #000; display: flex; align-items: center; gap: 6px; }
+        .brand span { color: #ff0000; font-size: 22px; }
+        .header-btn { background: #ff0000; color: white; border: none; padding: 6px 14px; border-radius: 15px; font-weight: bold; font-size: 13px; }
 
-        /* असली YouTube को ऐप के अंदर दिखाने के लिए फ्रेम */
-        .youtube-frame {
-            position: absolute;
-            top: 50px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 50px);
-            border: none;
-        }
+        .search-box { padding: 12px 15px; background: #fff; display: flex; gap: 10px; border-bottom: 1px solid #ddd; }
+        .search-box input { flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 20px; outline: none; font-size: 14px; background: #f8f8f8; }
+        .search-box button { background: #ff0000; color: white; border: none; padding: 10px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+        .video-card { background: #fff; margin-bottom: 15px; cursor: pointer; }
+        .thumbnail { width: 100%; height: 210px; background: #000; position: relative; }
+        .thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+        .video-info { display: flex; padding: 12px; gap: 12px; }
+        .avatar { width: 38px; height: 38px; background: #ff0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .details h4 { margin: 0 0 5px 0; font-size: 15px; color: #0f0f0f; line-height: 1.4; }
+        .details p { margin: 0; font-size: 12px; color: #606060; }
+
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 8px 0; z-index: 100; }
+        .nav-item { text-align: center; font-size: 11px; color: #0f0f0f; text-decoration: none; }
+        .nav-item span { display: block; font-size: 18px; }
     </style>
 </head>
 <body>
 
-    <!-- ऊपर आपका नाम और ब्रांडिंग -->
-    <div class="custom-header">
-        <div class="brand-title"><span>▶</span> Sanju Regar</div>
-        <div class="header-action">NEW TO</div>
+    <div class="header">
+        <div class="brand"><span>▶</span> Sanju Regar</div>
+        <button class="header-btn">NEW TO</button>
     </div>
 
-    <!-- ऐप के अंदर असली YouTube मोबाइल वर्जन लोड होगा -->
-    <iframe class="youtube-frame" src="https://m.youtube.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="search-box">
+        <input type="text" id="query" placeholder="गाना या वीडियो खोजें...">
+        <button onclick="searchVideos()">खोजें</button>
+    </div>
+
+    <!-- वीडियो लिस्ट (आप इसमें अपने वीडियो या रीमिक्स जोड़ सकते हैं) -->
+    <div class="video-card" onclick="playVideo('DJ Sanjay Jaipur Remix')">
+        <div class="thumbnail">
+            <img src="https://img.youtube.com/vi/3JZ_D3ELwOQ/hqdefault.jpg" alt="Thumbnail">
+        </div>
+        <div class="video-info">
+            <div class="avatar">SR</div>
+            <div class="details">
+                <h4>H.B.S ka system ‼️ #dj sanju jaipur 🙏 #runicha</h4>
+                <p>DJ Sanjay Jaipur • 4.7K views • 1 month ago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-card" onclick="playVideo('Sanju Regar Vlogs')">
+        <div class="thumbnail">
+            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Thumbnail">
+        </div>
+        <div class="video-info">
+            <div class="avatar">SR</div>
+            <div class="details">
+                <h4>Sanju Art & Vlogs - New Special Creation</h4>
+                <p>Sanju Regar • 12K views • 2 weeks ago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-item"><span>🏠</span>Home</a>
+        <a href="#" class="nav-item"><span>⚡</span>Shorts</a>
+        <a href="#" class="nav-item"><span>➕</span>Upload</a>
+        <a href="#" class="nav-item"><span>👤</span>You</a>
+    </div>
+
+    <script>
+        function searchVideos() {
+            var text = document.getElementById('query').value;
+            if(text) {
+                alert('खोज रहा है: ' + text);
+            }
+        }
+        function playVideo(title) {
+            alert('चला रहा है: ' + title);
+        }
+    </script>
 
 </body>
 </html>
