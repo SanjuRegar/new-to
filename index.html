@@ -5,80 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanju Regar - NEW TO</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #ffffff;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header h1 {
-            color: #ff0000;
-            font-size: 20px;
-            margin: 0;
-        }
-        .search-box {
-            padding: 15px;
-            text-align: center;
-            background: #fff;
-        }
-        .search-box input {
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 20px 0 0 20px;
-            outline: none;
-        }
-        .search-box button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background: #ff0000;
-            color: white;
-            border: 1px solid #ff0000;
-            border-radius: 0 20px 20px 0;
-            cursor: pointer;
-        }
-        .content {
-            padding: 20px;
-            text-align: center;
-            color: #333;
-        }
+        body { font-family: Roboto, Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; padding-bottom: 60px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: #fff; border-bottom: 1px solid #e5e5e5; position: sticky; top: 0; z-index: 100; }
+        .logo-area { font-size: 18px; font-weight: bold; color: #000; display: flex; align-items: center; gap: 6px; }
+        .logo-area span { color: #ff0000; font-size: 22px; }
+        .header-icons { display: flex; gap: 15px; font-size: 20px; }
+        
+        .search-bar { padding: 10px 15px; background: #fff; display: flex; gap: 10px; border-bottom: 1px solid #e5e5e5; }
+        .search-bar input { flex: 1; padding: 8px 15px; border: 1px solid #ccc; border-radius: 20px; outline: none; font-size: 14px; background: #f8f8f8; }
+        .search-bar button { background: #ff0000; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+        .video-card { background: #fff; margin-bottom: 12px; }
+        .thumbnail { width: 100%; height: 210px; background: #000; position: relative; }
+        .thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+        .video-details { display: flex; padding: 12px; gap: 12px; }
+        .channel-avatar { width: 36px; height: 36px; background: #ccc; border-radius: 50%; }
+        .video-meta h4 { margin: 0 0 4px 0; font-size: 15px; color: #0f0f0f; line-height: 1.4; }
+        .video-meta p { margin: 0; font-size: 12px; color: #606060; }
+
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 8px 0; z-index: 100; }
+        .nav-item { text-align: center; font-size: 11px; color: #0f0f0f; text-decoration: none; }
+        .nav-item span { display: block; font-size: 18px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>Sanju Regar</h1>
-        <span>🎥 NEW TO</span>
+        <div class="logo-area"><span>▶</span> Sanju Regar</div>
+        <div class="header-icons">🔔 🔍</div>
     </div>
 
-    <div class="search-box">
-        <input type="text" id="query" placeholder="वीडियो खोजें...">
-        <button onclick="searchVideo()">खोजें</button>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="वीडियो या गाना खोजें...">
+        <button onclick="performSearch()">खोजें</button>
     </div>
 
-    <div class="content">
-        <h3>तैयार है आपका नया वीडियो फीड!</h3>
-        <p>यहाँ आपके चैनल और ऑल इंडिया के वीडियो दिखाई देंगे।</p>
+    <!-- वीडियो फीड -->
+    <div class="video-card" onclick="openYT('DJ Sanjay Jaipur Remix')">
+        <div class="thumbnail">
+            <img src="https://img.youtube.com/vi/3JZ_D3ELwOQ/hqdefault.jpg" alt="Thumbnail">
+        </div>
+        <div class="video-details">
+            <div class="channel-avatar"></div>
+            <div class="video-meta">
+                <h4>H.B.S ka system ‼️ #dj sanju jaipur 🙏 #runicha</h4>
+                <p>DJ Sanjay Jaipur • 4.7K views • 1 month ago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-card" onclick="openYT('Seedance 2.5 AI Video')">
+        <div class="thumbnail">
+            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Thumbnail">
+        </div>
+        <div class="video-details">
+            <div class="channel-avatar"></div>
+            <div class="video-meta">
+                <h4>Create stunning AI videos with Seedance 2.5 on OpenArt</h4>
+                <p>OpenArt • Sponsored</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-item"><span>🏠</span>Home</a>
+        <a href="#" class="nav-item"><span>⚡</span>Shorts</a>
+        <a href="#" class="nav-item"><span>➕</span>Create</a>
+        <a href="#" class="nav-item"><span>👤</span>You</a>
     </div>
 
     <script>
-        function searchVideo() {
-            var q = document.getElementById('query').value;
+        function performSearch() {
+            var q = document.getElementById('searchInput').value;
             if(q) {
                 window.open('https://m.youtube.com/results?search_query=' + encodeURIComponent(q), '_blank');
             }
+        }
+        function openYT(title) {
+            window.open('https://m.youtube.com/results?search_query=' + encodeURIComponent(title), '_blank');
         }
     </script>
 
