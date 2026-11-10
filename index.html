@@ -5,84 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanju Regar - NEW TO</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; padding-bottom: 60px; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #fff; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
+        * { box-sizing: border-box; }
+        body { font-family: Roboto, Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; padding-bottom: 70px; padding-top: 110px; }
+        
+        /* टॉप हेडर और सर्च बार */
+        .header-container { position: fixed; top: 0; left: 0; width: 100%; background: #fff; z-index: 1000; border-bottom: 1px solid #e5e5e5; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; }
         .brand { font-size: 18px; font-weight: bold; color: #000; display: flex; align-items: center; gap: 6px; }
         .brand span { color: #ff0000; font-size: 22px; }
-        .header-btn { background: #ff0000; color: white; border: none; padding: 6px 14px; border-radius: 15px; font-weight: bold; font-size: 13px; }
+        
+        .header-icons { display: flex; gap: 15px; align-items: center; font-size: 20px; cursor: pointer; }
+        .profile-icon { width: 30px; height: 30px; background: #2196F3; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; }
 
-        .search-box { padding: 12px 15px; background: #fff; display: flex; gap: 10px; border-bottom: 1px solid #ddd; }
-        .search-box input { flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 20px; outline: none; font-size: 14px; background: #f8f8f8; }
-        .search-box button { background: #ff0000; color: white; border: none; padding: 10px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+        .search-bar { padding: 8px 15px 12px 15px; display: flex; gap: 10px; background: #fff; }
+        .search-bar input { flex: 1; padding: 9px 15px; border: 1px solid #ccc; border-radius: 20px; outline: none; font-size: 14px; background: #f8f8f8; }
+        .search-bar button { background: #ff0000; color: white; border: none; padding: 0 18px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 14px; }
 
+        /* वीडियो कार्ड डिज़ाइन */
         .video-card { background: #fff; margin-bottom: 15px; cursor: pointer; }
-        .thumbnail { width: 100%; height: 210px; background: #000; position: relative; }
-        .thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+        .thumbnail-box { width: 100%; height: 210px; background: #000; position: relative; }
+        .thumbnail-box iframe, .thumbnail-box img { width: 100%; height: 100%; border: none; object-fit: cover; }
+        
         .video-info { display: flex; padding: 12px; gap: 12px; }
-        .avatar { width: 38px; height: 38px; background: #ff0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
-        .details h4 { margin: 0 0 5px 0; font-size: 15px; color: #0f0f0f; line-height: 1.4; }
-        .details p { margin: 0; font-size: 12px; color: #606060; }
+        .channel-avatar { width: 38px; height: 38px; background: #666; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+        .video-details h4 { margin: 0 0 5px 0; font-size: 15px; color: #0f0f0f; line-height: 1.4; }
+        .video-details p { margin: 0; font-size: 12px; color: #606060; }
 
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 8px 0; z-index: 100; }
-        .nav-item { text-align: center; font-size: 11px; color: #0f0f0f; text-decoration: none; }
+        /* नीचे का नेविगेशन बार (होम, शॉर्ट्स, अपलोड, यू) */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; }
+        .nav-item { text-align: center; font-size: 11px; color: #0f0f0f; text-decoration: none; cursor: pointer; }
         .nav-item span { display: block; font-size: 18px; }
+
+        /* प्रोफाइल / अकाउंट मॉडल पॉपअप */
+        #profileModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: #fff; width: 90%; max-width: 350px; padding: 20px; border-radius: 10px; text-align: center; color: #000; }
+        .modal-content input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        .modal-content button { background: #ff0000; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; }
+        .close-btn { background: #666 !important; margin-top: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="brand"><span>▶</span> Sanju Regar</div>
-        <button class="header-btn">NEW TO</button>
-    </div>
-
-    <div class="search-box">
-        <input type="text" id="query" placeholder="गाना या वीडियो खोजें...">
-        <button onclick="searchVideos()">खोजें</button>
-    </div>
-
-    <!-- वीडियो लिस्ट (आप इसमें अपने वीडियो या रीमिक्स जोड़ सकते हैं) -->
-    <div class="video-card" onclick="playVideo('DJ Sanjay Jaipur Remix')">
-        <div class="thumbnail">
-            <img src="https://img.youtube.com/vi/3JZ_D3ELwOQ/hqdefault.jpg" alt="Thumbnail">
+    <!-- टॉप हेडर और सर्च बार -->
+    <div class="header-container">
+        <div class="top-bar">
+            <div class="brand"><span>▶</span> Sanju Regar</div>
+            <div class="header-icons">
+                <span onclick="alert('कोई नई सूचना नहीं है')">🔔</span>
+                <div class="profile-icon" onclick="openProfile()" id="userInitial">SR</div>
+            </div>
         </div>
-        <div class="video-info">
-            <div class="avatar">SR</div>
-            <div class="details">
-                <h4>H.B.S ka system ‼️ #dj sanju jaipur 🙏 #runicha</h4>
-                <p>DJ Sanjay Jaipur • 4.7K views • 1 month ago</p>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="गाना या वीडियो खोजें...">
+            <button onclick="searchContent()">खोजें</button>
+        </div>
+    </div>
+
+    <!-- वीडियो फीड (यहाँ आप और भी वीडियो जोड़ सकते हैं) -->
+    <div id="feedContainer">
+        <div class="video-card">
+            <div class="thumbnail-box" onclick="playInline(this, '3JZ_D3ELwOQ')">
+                <img src="https://img.youtube.com/vi/3JZ_D3ELwOQ/hqdefault.jpg" alt="Thumbnail">
+            </div>
+            <div class="video-info">
+                <div class="channel-avatar" style="background: #e91e63;">DJ</div>
+                <div class="video-details">
+                    <h4>H.B.S ka system ‼️ #dj sanju jaipur 🙏 #runicha</h4>
+                    <p>DJ Sanjay Jaipur • 4.7K views • 1 month ago</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <div class="thumbnail-box" onclick="playInline(this, 'dQw4w9WgXcQ')">
+                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Thumbnail">
+            </div>
+            <div class="video-info">
+                <div class="channel-avatar" style="background: #4caf50;">SA</div>
+                <div class="video-details">
+                    <h4>Sanju Art & Vlogs - New Special Creation & Painting Work</h4>
+                    <p>Sanju Regar • 12K views • 2 weeks ago</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="video-card" onclick="playVideo('Sanju Regar Vlogs')">
-        <div class="thumbnail">
-            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Thumbnail">
-        </div>
-        <div class="video-info">
-            <div class="avatar">SR</div>
-            <div class="details">
-                <h4>Sanju Art & Vlogs - New Special Creation</h4>
-                <p>Sanju Regar • 12K views • 2 weeks ago</p>
-            </div>
-        </div>
-    </div>
-
+    <!-- नीचे का नेविगेशन बार -->
     <div class="bottom-nav">
-        <a href="#" class="nav-item"><span>🏠</span>Home</a>
-        <a href="#" class="nav-item"><span>⚡</span>Shorts</a>
-        <a href="#" class="nav-item"><span>➕</span>Upload</a>
-        <a href="#" class="nav-item"><span>👤</span>You</a>
+        <div class="nav-item" onclick="goHome()"><span>🏠</span>Home</div>
+        <div class="nav-item" onclick="openShorts()"><span>⚡</span>Shorts</div>
+        <div class="nav-item" onclick="openUpload()"><span>➕</span>Upload</div>
+        <div class="nav-item" onclick="openProfile()"><span>👤</span>You</div>
+    </div>
+
+    <!-- प्रोफाइल / ईमेल आईडी जोड़ने का पॉपअप -->
+    <div id="profileModal">
+        <div class="modal-content">
+            <h3>अपनी प्रोफाइल / ईमेल जोड़ें</h3>
+            <p>यहाँ अपनी जीमेल आईडी दर्ज करें ताकि आपकी ऐप में अकाउंट जुड़ सके:</p>
+            <input type="email" id="userEmailInput" placeholder="name@gmail.com">
+            <button onclick="saveProfile()">सहेजें (Save)</button>
+            <button class="close-btn" onclick="closeProfile()">बंद करें</button>
+        </div>
     </div>
 
     <script>
-        function searchVideos() {
-            var text = document.getElementById('query').value;
-            if(text) {
-                alert('खोज रहा है: ' + text);
+        // वीडियो पर क्लिक करते ही ऐप के अंदर ही वीडियो चलना शुरू हो जाएगा
+        function playInline(element, videoId) {
+            element.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+
+        // सर्च करने का फंक्शन
+        function searchContent() {
+            let query = document.getElementById('searchInput').value;
+            if(query) {
+                let feed = document.getElementById('feedContainer');
+                feed.innerHTML = `
+                    <div style="padding: 20px; text-align: center;">
+                        <h3>"${query}" के परिणाम</h3>
+                        <p>तलाश जारी है... नीचे दिए गए गानों का आनंद लें।</p>
+                    </div>
+                ` + feed.innerHTML;
             }
         }
-        function playVideo(title) {
-            alert('चला रहा है: ' + title);
+
+        // प्रोफाइल ओपन और क्लोज करने के फंक्शन
+        function openProfile() {
+            document.getElementById('profileModal').style.display = 'flex';
+        }
+        function closeProfile() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+        function saveProfile() {
+            let email = document.getElementById('userEmailInput').value;
+            if(email) {
+                alert('सफलतापूर्वक जुड़ गया: ' + email);
+                let initial = email.charAt(0).toUpperCase();
+                document.getElementById('userInitial').innerText = initial;
+                closeProfile();
+            } else {
+                alert('कृपया सही ईमेल दर्ज करें।');
+            }
+        }
+
+        function goHome() {
+            location.reload();
+        }
+        function openShorts() {
+            alert('शॉर्ट्स सेक्शन जल्द लोड हो रहा है!');
+        }
+        function openUpload() {
+            let link = prompt('अपने वीडियो का यूट्यूब लिंक या टाइटल यहाँ डालें:');
+            if(link) {
+                alert('आपका वीडियो सफलतापूर्वक जोड़ दिया गया है!');
+            }
         }
     </script>
 
