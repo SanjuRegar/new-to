@@ -1,0 +1,13 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "NEW TO",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "NEW TO",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "id": "/new-to/",
+  "description": "A YouTube style video sharing app"
+}
