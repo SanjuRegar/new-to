@@ -1,118 +1,86 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEW TO</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#fff;color:#171717;font-family:Arial,sans-serif}
-header{background:#fff;padding:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ddd;position:sticky;top:0}
-.logo{font-size:27px;font-weight:bold;color:#e62117}
-.logo span{color:#222}
-button{border:0;border-radius:8px;padding:11px 15px;cursor:pointer;font-weight:bold}
-.search{padding:12px;background:#f1f1f1;border-radius:20px;border:0;width:100%;margin:12px 0}
-.tabs{display:flex;gap:10px;padding:12px;overflow:auto}
-.tabs button{background:#eee;white-space:nowrap}
-.tabs button.active{background:#222;color:white}
-.upload{margin:12px;padding:16px;background:#f5f5f5;border-radius:12px}
-.upload button{background:#e62117;color:white}
-.video{margin:14px 0 22px;border-bottom:1px solid #ddd;padding-bottom:15px}
-video{width:100%;background:#111;max-height:350px}
-.info{padding:8px 12px}
-.info h3{margin:5px 0}
-.actions{display:flex;gap:10px;margin-top:12px}
-.actions button{background:#eee}
-small{color:#777}
-footer{position:sticky;bottom:0;background:white;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:14px 5px}
-footer button{background:white}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanju Regar - NEW TO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header h1 {
+            color: #ff0000;
+            font-size: 20px;
+            margin: 0;
+        }
+        .search-box {
+            padding: 15px;
+            text-align: center;
+            background: #fff;
+        }
+        .search-box input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 20px 0 0 20px;
+            outline: none;
+        }
+        .search-box button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #ff0000;
+            color: white;
+            border: 1px solid #ff0000;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-<div class="logo">▶ NEW <span>TO</span></div>
-<button onclick="alert('NEW TO में आपका स्वागत है!')">👤 Login</button>
-</header>
+    <div class="header">
+        <h1>Sanju Regar</h1>
+        <span>🎥 NEW TO</span>
+    </div>
 
-<main style="padding:12px">
-<input class="search" id="search" placeholder="🔍 वीडियो खोजें..." oninput="filterVideos()">
+    <div class="search-box">
+        <input type="text" id="query" placeholder="वीडियो खोजें...">
+        <button onclick="searchVideo()">खोजें</button>
+    </div>
 
-<div class="tabs">
-<button class="active" onclick="showTab('all',this)">सब</button>
-<button onclick="showTab('short',this)">Shorts</button>
-<button onclick="showTab('music',this)">Music</button>
-<button onclick="showTab('education',this)">Education</button>
-</div>
+    <div class="content">
+        <h3>तैयार है आपका नया वीडियो फीड!</h3>
+        <p>यहाँ आपके चैनल और ऑल इंडिया के वीडियो दिखाई देंगे।</p>
+    </div>
 
-<div class="upload">
-<h3>🎬 अपना वीडियो डालें</h3>
-<input type="file" id="file" accept="video/*">
-<br><br>
-<button onclick="uploadVideo()">वीडियो अपलोड करें</button>
-</div>
+    <script>
+        function searchVideo() {
+            var q = document.getElementById('query').value;
+            if(q) {
+                window.open('https://m.youtube.com/results?search_query=' + encodeURIComponent(q), '_blank');
+            }
+        }
+    </script>
 
-<h3>🔥 आपके लिए वीडियो</h3>
-<div id="videos"></div>
-</main>
-
-<footer>
-<button onclick="window.scrollTo(0,0)">🏠 Home</button>
-<button onclick="document.getElementById('file').click()">➕ Upload</button>
-<button onclick="alert('आपका चैनल जल्द तैयार होगा!')">👤 Channel</button>
-</footer>
-
-<script>
-let currentTab='all';
-function uploadVideo(){
- const file=document.getElementById('file').files[0];
- if(!file){alert('पहले वीडियो चुनिए');return}
- if(!file.type.startsWith('video/')){alert('सही वीडियो चुनिए');return}
- const url=URL.createObjectURL(file);
- addVideo(url,file.name);
- document.getElementById('file').value='';
- alert('वीडियो आपके इस डेमो ऐप में जुड़ गया!');
-}
-function addVideo(url,name){
- const div=document.createElement('div');
- div.className='video';
- div.innerHTML=`<video controls playsinline></video>
- <div class="info">
- <h3></h3><small>NEW TO • नया वीडियो</small>
- <div class="actions">
- <button onclick="like(this)">👍 0</button>
- <button onclick="alert('कमेंट सुविधा जल्द आएगी')">💬 Comment</button>
- <button onclick="shareVideo()">↗ Share</button>
- </div></div>`;
- div.querySelector('video').src=url;
- div.querySelector('h3').textContent=name;
- div.dataset.category='all';
- document.getElementById('videos').prepend(div);
-}
-function like(btn){
- let n=Number(btn.dataset.likes||0)+1;
- btn.dataset.likes=n;
- btn.textContent='👍 '+n;
-}
-function shareVideo(){
- if(navigator.share) navigator.share({title:'NEW TO',text:'मेरा वीडियो NEW TO पर देखें'});
- else alert('शेयर करने के लिए लिंक तैयार नहीं है');
-}
-function filterVideos(){
- let q=document.getElementById('search').value.toLowerCase();
- document.querySelectorAll('.video').forEach(v=>{
- v.style.display=v.querySelector('h3').textContent.toLowerCase().includes(q)?'block':'none';
- });
-}
-function showTab(tab,btn){
- currentTab=tab;
- document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
- btn.classList.add('active');
- document.querySelectorAll('.video').forEach(v=>{
- v.style.display=tab==='all'||v.dataset.category===tab?'block':'none';
- });
-}
-</script>
 </body>
 </html>
